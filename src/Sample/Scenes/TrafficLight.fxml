@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black; -fx-padding: 10;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="Sample.TrafficLightController">
+
+    <StackPane VBox.vgrow="ALWAYS">
+        <Circle fx:id="yellowLight" fill="GRAY" radius="50.0" translateY="60">
+         <StackPane.margin>
+            <Insets top="-100.0" />
+         </StackPane.margin></Circle>
+        <Circle fx:id="greenLight" fill="GRAY" radius="50.0" translateY="120" />
+        <Circle fx:id="redLight" fill="RED" radius="50.0">
+         <StackPane.margin>
+            <Insets top="-210.0" />
+         </StackPane.margin></Circle>
+      <Button fx:id="btn_back" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="BACK" textAlignment="CENTER">
+         <StackPane.margin>
+            <Insets right="450.0" top="300.0" />
+         </StackPane.margin>
+         <font>
+            <Font name="Inter Regular" size="16.0" />
+         </font>
+      </Button>
+    </StackPane>
+
+    <HBox alignment="CENTER" spacing="10" />
+
+</VBox>

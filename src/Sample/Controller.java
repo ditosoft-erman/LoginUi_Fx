@@ -1,87 +1,74 @@
 package Sample;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import java.io.IOException;
 
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
+public class Controller {
 
-public class Controller{
-//    @FXML
-//    private Button btn_close;
-//
-//    @FXML
-//    private Button btn_login;
-//
-//    @FXML
-//    private PasswordField pf_password;
-//
-//    @FXML
-//    private TextField tf_username;
-//
-//    @FXML
-//    private Label lbl_error;
+    @FXML
+    private TextField tf_username;
 
-//    private String errorMessage = "";
-//
-//    private boolean isFieldFilled(){
-//        boolean  isFilled = true;
-//        if(tf_username.getText().isEmpty()){
-//            isFilled = false;
-//            errorMessage = "Username is empty";
-//        }
-//        if(pf_password.getText().isEmpty()){
-//            isFilled = false;
-//            if(errorMessage.isEmpty()){
-//                errorMessage = "Password is empty";
-//            }else{
-//                errorMessage += "\nPassword is incorrect";
-//            }
-//        }
-//        lbl_error.setText(errorMessage);
-//        return isFilled;
-//    }
-//    private boolean isValid(){
-//    boolean isValid = true;
-//    if(tf_username.getText().equals(Main.USERNAME)){
-//        isValid = false;
-//        errorMessage = "Invalid Username";
-//    }
-//
-//    if(!pf_password.equals(Main.PASSWORD)){
-//        isValid = false;
-//        if(errorMessage.isEmpty()){
-//            errorMessage = "Invalid Password";
-//        }else {
-//            errorMessage += "\nPassword is incorrect";
-//        }
-//    }
-//
-//    lbl_error.setText(errorMessage);
-//    return isValid;
-//    }
-//
-//    @Override
-//    public void initialize(URL location, ResourceBundle resources) {
-//        btn_close.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                System.exit(0);
-//            }
-//        });
-//
-//        btn_login.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                if(isFieldFilled() && isValid()){
-//                        //do something
-//                }
-//            }
-//        });
-//    }
+    @FXML
+    private PasswordField pf_password;
+
+    @FXML
+    private Button btn_login;
+
+    @FXML
+    private Label lbl_error;
+
+    @FXML
+    private void initialize() {
+        btn_login.setOnAction(event -> handleLoginButtonAction());
+    }
+
+    private void handleLoginButtonAction() {
+        String username = tf_username.getText();
+        String password = pf_password.getText();
+
+        if (Main.USERNAME.equals(username) && Main.PASSWORD.equals(password)) {
+            showAlert(Alert.AlertType.INFORMATION, "Login Successful", "Welcome, " + username + "!");
+            switchToOptionsScene();
+        } else {
+            lbl_error.setText("Incorrect username or password.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void switchToOptionsScene() {
+        try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scenes/Options.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+
+        // Get the current stage
+        Stage stage = (Stage) btn_login.getScene().getWindow();
+
+        // Set the new scene
+        stage.setScene(scene);
+        stage.show(); // Show the new scene
+
+    } catch (IOException e) {
+        e.printStackTrace();
+        showAlert(Alert.AlertType.ERROR, "Error", "Failed to load Options scene.");
+    }
+}
+
+
 }

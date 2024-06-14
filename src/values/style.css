@@ -15,3 +15,26 @@
     -fx-border-color: #01BED2;
     -fx-border-width: 1.5;
 }
+
+.green-button {
+    -fx-background-color: green;
+    -fx-text-fill: white ;
+}
+
+.red-button {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.update-button {
+    -fx-background-color: gray;
+    -fx-text-fill: white;
+}
+
+.background {
+    -fx-background-color: #0080ff;
+}
+
+.yellow{
+    -fx-background-color: yellow;
+}
